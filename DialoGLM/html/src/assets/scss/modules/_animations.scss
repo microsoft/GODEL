@@ -1,0 +1,12 @@
+.messages-list-item {
+  transition: all 0.2s;
+}
+
+.messages-list-enter, .messages-list-leave-to
+/* .messages-list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.messages-list-leave-active {
+  position: absolute;
+}
