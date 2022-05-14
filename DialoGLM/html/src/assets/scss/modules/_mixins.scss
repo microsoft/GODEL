@@ -1,0 +1,17 @@
+@mixin just-flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($direction: column, $justify-content: center) {
+  @include just-flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+}
+
+@mixin box-shadow($values...) {
+  @each $val in $values {
+    -webkit-box-shadow: #{$val};
+    box-shadow: #{$val};  
+  }
+}

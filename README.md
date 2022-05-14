@@ -1,4 +1,265 @@
-# Project
+# DialoGLM: Large-Scale Pre-training for Goal-Directed Dialog
+
+## Introduction
+This repository showcases **building goal-directed dialog** using DialoGLM, and contains the dataset, source code and pre-trained model for the following paper:
+
+Project Webpage:
+Arxiv paper: [DialoGLM: Large-Scale Pre-training for Goal-Directed Dialog
+]() Author List
+
+![image](doc/DialoGLM.png)
+
+DialoGLM is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
+
+This repository is based on Hugginface Transformers. Some evaluation scripts and dataset are adapted from [DSTC7-End-to-End-Conversation-Modeling](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling), [DialoGPT](https://github.com/microsoft/DialoGPT), [UnifiedQA](https://github.com/allenai/unifiedqa), [MS MARCO](https://microsoft.github.io/msmarco/), [MultiWOZ](https://github.com/budzianowski/multiwoz), [Schema-Guided Dataset](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), etc.
+
+The included scripts can be used to reproduce the results reported in the paper. Project and demo webpage: [https://aka.ms/dialoglm](https://aka.ms/dialoglm)
+
+## Installation 
+**Requires** The interactive interface requries *node.js* and *npm*. Please refer to [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for installation.
+
+Please use the below commands to create the environment, clone the repo and install required packages.
+```
+conda create -n dialoglm-env python=3.8
+conda activate dialoglm-env
+conda install nodejs
+git clone FINAL_REPO_PATH
+pip install -r requirements.txt
+export PYTHONPATH="`ls`/DialoGLM"
+```
+Fetch and unzip the pretrained model based on which to continue finetune your own data. (*will release more versions of pretrained models, stay tuned*) 
+
+```zsh
+wget https://bapengstorage.blob.core.windows.net/dialoglm_pretrained_models.tar.gz (TBA)
+tar -xvf dialoglm_pretrained_models.tar.gz
+```
+## Pipeline
+**Data format**
+```json
+  {
+    "Context": "Please remind me of calling to Jessie at 2PM.",
+    "Knowledge": "reminder_contact_name is Jessie, reminder_time is 2PM",
+    "Response": "Sure, set the reminder: call to Jesse at 2PM"
+  },
+```
+We use json format to represent a training example. As shown in the above example, it contains the following fields:
+* **Context** - The context from session beginning to current turn.
+* **Knowledge** - External or environment state represented in plain text.
+* **Reponse** - The target agent respose. It can be a template, an api call or natural language.
+
+**Fine-tuning**
+```Bash
+DATA_NAME={path_of_data}
+OUTPUT_DIR={path_of_fine-tuned_model}
+MODEL_PATH={path_of_pre-trained_model}
+EXP_NAME={experiment_name}
+
+python train.py --model_name_or_path ${MODEL_PATH} \
+	--dataset_name ${DATA_NAME} \
+	--output_dir ${OUTPUT_DIR} \
+	--per_device_train_batch_size=16 \
+	--per_device_eval_batch_size=16 \
+	--max_target_length 512 \
+	--max_length 512 \
+	--num_train_epochs 50 \
+	--save_steps 10000 \
+	--num_beams 5 \
+	--exp_name ${EXP_NAME} --preprocessing_num_workers 24
+```
+
+
+**Generation**
+```python
+DATA_NAME={path_of_data}
+OUTPUT_DIR={path_to_save_predictions}
+MODEL_PATH={path_of_fine-tuned_model}
+
+python generate.py --model_name_or_path ${MODEL_PATH}  \
+	--dataset_name ${DATA_NAME}  \
+	--output_dir ${OUTPUT_DIR}  \
+	--per_device_eval_batch_size=16  \
+	--max_target_length 128 \
+	--max_length 512  \
+	--preprocessing_num_workers 24  \
+	--num_beams 5 
+```
+
+**Interaction**  
+
+We provide an demo interface to chat with finetuned models. The backend server is based on *flask* and the interface is based on *vue*, *bootstrap-vue*, and *BasicVueChat*.
+
+Start the backend server:
+```bash
+# Please create the backend server refering to e.g., dstc9_server.py
+python EXAMPLE_server.py # start the sever and expose 8080 
+```
+
+Start serving frontend page:
+```bash
+cd DialoGLM/html
+npm install
+npm run serve 
+```
+Open localhost:8080 in your web browser, you will see the following page. Note that the backend port should be consistent with the port used in html/compoents/chat.vue.
+
+<img src="doc/interaction_interface_example.png" alt="drawing" width="600"/>
+
+## Models
+
+We have released 2 fine-tuned models which can be further fine-tuned on low-resource user-customized dataset. The total parameters in these models range from 117M to 770M. The XL version will be accessible through an API.
+
+| Model      | Link |
+| :---: | :---: |
+| DialoGLM 110M Model      |  TBA      |
+| DialoGLM 770M Model   |     TBA    |
+| DialoGLM 175B Model   | API        |
+
+## Retraining full models
+
+### Data preparation
+DialoGLM is pre-trained with three phases 1) Linguistic pre-training on public web documents to gain the capability of text generation. 2) Dialog pre-training on public dialog data to learn to chat like a human. 3) Grounded dialog pre-training to enable a dialog model to generate responses grounding on specific goals.
+
+The first phase is rather straightforward, i.e., initiating from any pre-trained LMs. The remaining phases require:
+
+- Generating 27GB Reddit dataset, which involves downloading full Reddit submission and commnets dumps from https://files.pushshift.io/reddit creating intermediate files, which overall require 700GB of local disk space. Please follow this [repo](https://github.com/microsoft/DialoGPT) to prepare the data.
+
+- Preparing grounded datasets including [DSTC7-End-to-End-Conversation-Modeling](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling), [UnifiedQA](https://github.com/allenai/unifiedqa), [MS MARCO](https://microsoft.github.io/msmarco/), [Schema-Guided Dataset](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue). 
+
+Prepare reddit data and specify its path in *create_reddit_dataset.sh*
+```bash
+cd scripts
+./pretrain_data_preprocessing.sh
+```
+
+Downloading requried datasets and specify its path in *create_grounded_dataset.sh*
+```bash
+cd scripts 
+./create_grounded_dataset.sh
+```
+
+### Pre-Training
+```bash
+# Reddit training
+OUTPUT_DIR={path_to_save_predictions}
+accelerate launch --config_file configs/G16_config.yaml train.py 
+	--model_name_or_path t5-base \
+	--dataset_name ./datasets_loader/reddit_dataset.py \
+	--output_dir ${OUTPUT_DIR} \
+	--per_device_train_batch_size=16 \
+	--per_device_eval_batch_size=16 \
+	--max_target_length 256 \
+	--max_length 512 \
+	--num_train_epochs 10 \
+	--preprocessing_num_workers 24 \
+	--num_beams 5 \
+	--exp_name DialoGLM_reddit_training  \
+	--learning_rate 5e-5 \	
+	--save_every_checkpoint \
+	--save_steps 50000
+
+# Grounded training
+REDDIT_CHECKPOINT={path_to_saved_checkpoint}
+OUTPUT_DIR={path_to_save_predictions}
+accelerate launch --config_file configs/G16_config.yaml train.py 
+	--model_name_or_path ${REDDIT_CHECKPOINT} \
+	--dataset_name ./datasets_loader/grounded_dataset.py \
+	--output_dir ${OUTPUT_DIR} \
+	--per_device_train_batch_size=16 \
+	--per_device_eval_batch_size=16 \
+	--max_target_length 256 \
+	--max_length 512 \
+	--num_train_epochs 10 \
+	--preprocessing_num_workers 24 \
+	--num_beams 5 \
+	--exp_name DialoGLM_reddit_training  \
+	--learning_rate 5e-5 \
+	--save_every_checkpoint \
+	--save_steps 50000
+```
+
+### Fine-tuning and Evaluation
+
+DialoGLM is fine-tuned and evaluated on four tasks. We provide scripts to create training and testing data in our format. Please refer to *create_downstream_dataset.sh* to download the original data and execute the following cmd.
+
+```Bash
+cd scripts 
+./create_downstream_dataset.sh
+```
+
+```Bash
+GROUNDED_CHECKPOINT={path_to_saved_checkpoint}
+OUTPUT_DIR={path_to_save_predictions}
+TASK=wow
+accelerate launch --config_file configs/G16_config.yaml train.py 
+	--model_name_or_path ${GROUNDED_CHECKPOINT} \
+	--dataset_name ./datasets_loader/${TASK}_dataset.py \
+	--output_dir ${OUTPUT_DIR} \
+	--per_device_train_batch_size=16 \
+	--per_device_eval_batch_size=16 \
+	--max_target_length 256 \
+	--max_length 512 \
+	--num_train_epochs 10 \
+	--preprocessing_num_workers 24 \
+	--num_beams 5 \
+	--exp_name ${TASK}  \
+	--learning_rate 5e-5 \	
+	--save_every_checkpoint \
+	--save_steps 50000 
+```
+
+## Tutorial - Adding a new task using DialoGLM
+
+In this tutorial, you will build a grounded dialog model based on DialoGLM for DSTC9 task. Detailed information can be found at [here](https://github.com/alexa/alexa-with-dstc9-track1-dataset).
+
+Firstly download the data and convert it to DialoGLM format.
+```bash
+cd examples/dstc9
+./create_data.sh
+```
+*Finetune with the pre-trained DialoGLM model*
+```bash
+cd DialoGLM 
+DIALOGLM_MODEL={path_to_pre-trained_model}
+python train.py 
+	--model_name_or_path ${DIALOGLM_MODEL}   \
+	--dataset_name ../examples/dstc9/dstc9_dataset.py   \
+	--output_dir ../examples/dstc9/ckpt   \
+	--per_device_train_batch_size=16  \
+	--per_device_eval_batch_size=16  \
+	--max_target_length 128  \
+	--max_length 512  \
+	--num_train_epochs 50  \
+	--save_steps 10000  \
+	--num_beams 5  \
+	--exp_name wow-test \
+	--preprocessing_num_workers 24 \
+	--save_every_checkpoint 
+```
+*Interact with above trained model*
+```bash
+cd examples/dstc9
+# replace model path in dstc9_server with a trained ckpt in line 49
+python dstc9_server.py
+
+cd DialoGLM/html 
+npm install
+npm run serve
+```
+
+## Disclaimer
+This repository aims to facilitate research in a paradigm shift of building task bots at scale. This toolkit contains only part of the modeling machinery needed to actually produce a model weight file in a running dialog. On its own, this model provides only information about the weights of various text spans; in order for a researcher to actually use it, they will need to bring in-house conversational data of their own for future pre-training and decode the response generation from the pretrained/finetuned system. Microsoft is not responsible for any generation from the 3rd party utilization of the pretrained system.
+
+<!-- ## Contact
+Should you have any questions/suggestions, feel free to contact bapeng@microsoft.com. -->
+
+## Citation
+if you use this code and data in your research, please cite our arxiv paper:
+```
+TBA
+```
+
+
+<!-- # Project
 
 > This repo has been populated by an initial template to help get you started. Please
 > make sure to update the content to build a great experience for community-building.
@@ -8,7 +269,7 @@ As the maintainer of this project, please make a few updates:
 - Improving this README.MD file to provide a great experience
 - Updating SUPPORT.MD with content about this project's support experience
 - Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+- Remove this section from the README -->
 
 ## Contributing
 

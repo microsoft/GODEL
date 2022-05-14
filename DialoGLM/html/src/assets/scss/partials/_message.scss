@@ -1,0 +1,63 @@
+.window {
+
+  %message {
+    padding: 3px 5px;
+    
+    &__contents {
+      max-width: $message-max-width !important;
+      word-wrap: break-word;
+    }
+  }
+
+  .message {
+
+    @mixin message__contents($border-color: $alice-blue, $color: inherit, $background-color: $ghost-white) {
+      border: 1px solid $border-color;
+      border-radius: 12px;
+      color: $color;
+      background-color: $background-color;
+      padding: 3px 5px;
+    }
+
+    &--foreign {
+      @extend %message;
+      @include flex(row, flex-start);
+
+      .message {
+        &__author {
+          @include flex(column, center);
+          font-weight: $bold;
+          margin-right: 5px;
+        }
+
+        &__contents {
+          @include message__contents(transparent);
+          margin-right: 5px;
+        }
+
+        &__date {
+          @include flex(column, center);
+          color: $lavender-gray;
+        }
+      }
+    }
+
+    &--own {
+      @extend %message;
+      @include flex(row, flex-end);
+
+      .message {
+        &__contents {
+          @extend %message__contents;
+          @include message__contents(transparent, $ghost-white, $secondary);
+        }
+
+        &__date {
+          @include flex(column, center);
+          color: $lavender-gray;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

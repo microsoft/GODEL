@@ -1,0 +1,7 @@
+.features {
+  &__container {
+    @include just-flex;
+    position: relative;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,12 @@
+@import "../modules/all";
+
+body {
+  font-family: $font-family;
+  font-weight: $base-font-weight;
+  font-size: $base-font-size;
+  background-color: $light-bg;
+  color: $dark-text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}

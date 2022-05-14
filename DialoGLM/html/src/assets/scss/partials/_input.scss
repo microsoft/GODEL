@@ -1,0 +1,101 @@
+.window {
+  &__input {
+
+    &__container {
+      position: relative;
+      bottom: 0;
+
+      input[type="file"] {
+          height: 0.1px !important;
+          width: 0.1px !important;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          z-index: -1;
+      }
+
+      input[type="text"] {
+        font-size: 12px;
+      }
+
+    .image {
+      &--uploaded {
+        max-width: 50px;
+        max-height: 50px;
+        margin-right: 5px;
+        border-radius: 12px;
+      }
+    }
+
+    .image + label {
+      @include just-flex;
+      align-self: center;
+      margin-right: 5px;
+      color: $primary;
+      cursor: pointer;
+    }
+    
+    .image:focus + label,
+    .image + label:hover {
+        color: $secondary;
+        cursor: pointer;
+    }
+
+      .input {
+        &__container {
+          @include flex(row, space-between);
+          padding: 7px 5px;
+          align-items: center;
+        }
+
+        &-images-upload {
+          @include just-flex;
+          align-self: center;
+          margin-right: 5px;
+          color: $primary;
+          cursor: pointer;
+        }
+
+        &-emoji-picker {
+
+          &__container {
+            position: absolute;
+            bottom: 30px;
+            right: 5px;
+            z-index: 3;
+          }
+        }
+
+        &__field {
+          @include just-flex;
+          flex-grow: 9999;
+          padding: 5px 10px;
+          margin-right: 5px;
+          border-radius: 12px;
+          background-color: $input-background-color;
+
+          input {
+            border: none;
+            background-color: inherit;
+            color: $dark-text-color;
+            width: 100%;
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        &__button {
+          @include just-flex;
+          padding: 5px 10px;
+          border-radius: 12px;
+          background-color: $primary;
+          color: $light-text-color;
+          font-weight: $bold;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
