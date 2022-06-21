@@ -1,31 +1,32 @@
-# DialoGLM: Large-Scale Pre-training for Goal-Directed Dialog
+# GODEL: Large-Scale Pre-training for Goal-Directed Dialog
 
 ## Introduction
-This repository showcases **building goal-directed dialog** using DialoGLM, and contains the dataset, source code and pre-trained model for the following paper:
+This repository showcases **building goal-directed dialog** using GODEL, and contains the dataset, source code and pre-trained model for the following paper:
 
 Project Webpage:
-Arxiv paper: [DialoGLM: Large-Scale Pre-training for Goal-Directed Dialog
+Arxiv paper: [GODEL: Large-Scale Pre-training for Goal-Directed Dialog
 ]() Author List
 
 ![image](doc/DialoGLM.png)
 
-DialoGLM is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
+GODEL is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
 
 This repository is based on Hugginface Transformers. Some evaluation scripts and dataset are adapted from [DSTC7-End-to-End-Conversation-Modeling](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling), [DialoGPT](https://github.com/microsoft/DialoGPT), [UnifiedQA](https://github.com/allenai/unifiedqa), [MS MARCO](https://microsoft.github.io/msmarco/), [MultiWOZ](https://github.com/budzianowski/multiwoz), [Schema-Guided Dataset](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), etc.
 
-The included scripts can be used to reproduce the results reported in the paper. Project and demo webpage: [https://aka.ms/dialoglm](https://aka.ms/dialoglm)
+The included scripts can be used to reproduce the results reported in the paper. Project and demo webpage: [https://aka.ms/GODEL](https://aka.ms/GODEL)
 
 ## Installation 
 **Requires** The interactive interface requries *node.js* and *npm*. Please refer to [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for installation.
 
 Please use the below commands to create the environment, clone the repo and install required packages.
 ```
-conda create -n dialoglm-env python=3.8
-conda activate dialoglm-env
+conda create -n godel-env python=3.8
+conda activate godel-env
 conda install nodejs
-git clone FINAL_REPO_PATH
+git clone https://github.com/microsoft/GODEL.git
+cd GODEL
 pip install -r requirements.txt
-export PYTHONPATH="`ls`/DialoGLM"
+export PYTHONPATH="`pwd`"
 ```
 Fetch and unzip the pretrained model based on which to continue finetune your own data. (*will release more versions of pretrained models, stay tuned*) 
 
@@ -96,7 +97,7 @@ python EXAMPLE_server.py # start the sever and expose 8080
 
 Start serving frontend page:
 ```bash
-cd DialoGLM/html
+cd GODEL/html
 npm install
 npm run serve 
 ```
@@ -110,14 +111,14 @@ We have released 2 fine-tuned models which can be further fine-tuned on low-reso
 
 | Model      | Link |
 | :---: | :---: |
-| DialoGLM 110M Model      |  TBA      |
-| DialoGLM 770M Model   |     TBA    |
-| DialoGLM 175B Model   | API        |
+| GODEL 110M Model      |  TBA      |
+| GODEL 770M Model   |     TBA    |
+| GODEL 175B Model   | API        |
 
 ## Retraining full models
 
 ### Data preparation
-DialoGLM is pre-trained with three phases 1) Linguistic pre-training on public web documents to gain the capability of text generation. 2) Dialog pre-training on public dialog data to learn to chat like a human. 3) Grounded dialog pre-training to enable a dialog model to generate responses grounding on specific goals.
+GODEL is pre-trained with three phases 1) Linguistic pre-training on public web documents to gain the capability of text generation. 2) Dialog pre-training on public dialog data to learn to chat like a human. 3) Grounded dialog pre-training to enable a dialog model to generate responses grounding on specific goals.
 
 The first phase is rather straightforward, i.e., initiating from any pre-trained LMs. The remaining phases require:
 
@@ -152,7 +153,7 @@ accelerate launch --config_file configs/G16_config.yaml train.py
 	--num_train_epochs 10 \
 	--preprocessing_num_workers 24 \
 	--num_beams 5 \
-	--exp_name DialoGLM_reddit_training  \
+	--exp_name GODEL_reddit_training  \
 	--learning_rate 5e-5 \	
 	--save_every_checkpoint \
 	--save_steps 50000
@@ -171,7 +172,7 @@ accelerate launch --config_file configs/G16_config.yaml train.py
 	--num_train_epochs 10 \
 	--preprocessing_num_workers 24 \
 	--num_beams 5 \
-	--exp_name DialoGLM_reddit_training  \
+	--exp_name GODEL_reddit_training  \
 	--learning_rate 5e-5 \
 	--save_every_checkpoint \
 	--save_steps 50000
@@ -179,7 +180,7 @@ accelerate launch --config_file configs/G16_config.yaml train.py
 
 ### Fine-tuning and Evaluation
 
-DialoGLM is fine-tuned and evaluated on four tasks. We provide scripts to create training and testing data in our format. Please refer to *create_downstream_dataset.sh* to download the original data and execute the following cmd.
+GODEL is fine-tuned and evaluated on four tasks. We provide scripts to create training and testing data in our format. Please refer to *create_downstream_dataset.sh* to download the original data and execute the following cmd.
 
 ```Bash
 cd scripts 
@@ -207,21 +208,21 @@ accelerate launch --config_file configs/G16_config.yaml train.py
 	--save_steps 50000 
 ```
 
-## Tutorial - Adding a new task using DialoGLM
+## Tutorial - Adding a new task using GODEL
 
-In this tutorial, you will build a grounded dialog model based on DialoGLM for DSTC9 task. Detailed information can be found at [here](https://github.com/alexa/alexa-with-dstc9-track1-dataset).
+In this tutorial, you will build a grounded dialog model based on GODEL for DSTC9 task. Detailed information can be found at [here](https://github.com/alexa/alexa-with-dstc9-track1-dataset).
 
-Firstly download the data and convert it to DialoGLM format.
+Firstly download the data and convert it to GODEL format.
 ```bash
 cd examples/dstc9
 ./create_data.sh
 ```
-*Finetune with the pre-trained DialoGLM model*
+*Finetune with the pre-trained GODEL model*
 ```bash
-cd DialoGLM 
-DIALOGLM_MODEL={path_to_pre-trained_model}
+cd GODEL 
+GODEL_MODEL={path_to_pre-trained_model}
 python train.py 
-	--model_name_or_path ${DIALOGLM_MODEL}   \
+	--model_name_or_path ${GODEL_MODEL}   \
 	--dataset_name ../examples/dstc9/dstc9_dataset.py   \
 	--output_dir ../examples/dstc9/ckpt   \
 	--per_device_train_batch_size=16  \
@@ -241,7 +242,7 @@ cd examples/dstc9
 # replace model path in dstc9_server with a trained ckpt in line 49
 python dstc9_server.py
 
-cd DialoGLM/html 
+cd GODEL/html 
 npm install
 npm run serve
 ```
@@ -255,7 +256,12 @@ Should you have any questions/suggestions, feel free to contact bapeng@microsoft
 ## Citation
 if you use this code and data in your research, please cite our arxiv paper:
 ```
-TBA
+@techreport{GODEL,
+  title={Large-Scale Pre-training for Goal-Directed Dialogue},
+  author={Peng, Baolin and Galley, Michel and He, Pengcheng and Brockett, Chris and Liden, Lars and Nouri, Elnaz and Yu, Zhou and Dolan, Bill and Gao, Jianfeng},
+  year={2022},
+  institution={Microsoft Technical Report}
+}
 ```
 
 
