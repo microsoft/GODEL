@@ -4,9 +4,7 @@
 This repository showcases **building goal-directed dialog** using GODEL, and contains the dataset, source code and pre-trained model for the following paper:
 
 
-[GODEL: Large-Scale Pre-training for Goal-Directed Dialog](https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/)
-Baolin Peng, Michel Galley, Pengcheng He, Chris Brockett, Lars Liden, Elnaz Nouri, Zhou Yu, Bill Dolan, Jianfeng Gao
-
+[GODEL: Large-Scale Pre-training for Goal-Directed Dialog](https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/)<br>Baolin Peng, Michel Galley, Pengcheng He, Chris Brockett, Lars Liden, Elnaz Nouri, Zhou Yu, Bill Dolan, Jianfeng Gao
 ![image](doc/GODEL.png)
 
 GODEL is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
@@ -28,11 +26,11 @@ cd GODEL
 pip install -r requirements.txt
 export PYTHONPATH="`pwd`"
 ```
-Fetch and unzip the pretrained model based on which to continue finetune your own data. (*will release more versions of pretrained models, stay tuned*) 
+Fetch and unzip the pretrained model based on which to continue finetune your own data.  
 
 ```zsh
 wget https://bapengstorage.blob.core.windows.net/godel_base.tar.gz
-tar -xvf godel_base.tar.gz
+tar -zxvf godel_base.tar.gz
 ```
 ## Pipeline
 **Data format**
@@ -111,9 +109,9 @@ We have released three fine-tuned models which can be further fine-tuned on low-
 
 | Model      | Link |
 | :---: | :---: |
-| GODEL 110M Model      |  TBA      |
-| GODEL 770M Model   |     TBA    |
-| GODEL 2.7B Model    | TBA        |
+| GODEL 220M Model      |  [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-Base.tar.gz)      |
+| GODEL 770M Model   |     [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-Large.tar.gz)    |
+| GODEL 2.7B Model    | [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-XLarge.tar.gz)        |
 
 ## Retraining full models
 
