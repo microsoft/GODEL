@@ -111,7 +111,7 @@ We have released three fine-tuned models which can be further fine-tuned on low-
 
 | Model      | Link |
 | :---: | :---: |
-| GODEL 110M Model      |  TBA      |
+| GODEL 220M Model      |  TBA      |
 | GODEL 770M Model   |     TBA    |
 | GODEL 2.7B Model    | TBA        |
 
