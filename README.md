@@ -3,9 +3,9 @@
 ## Introduction
 This repository showcases **building goal-directed dialog** using GODEL, and contains the dataset, source code and pre-trained model for the following paper:
 
-Project Webpage:
-Arxiv paper: [GODEL: Large-Scale Pre-training for Goal-Directed Dialog
-]() Author List
+
+[GODEL: Large-Scale Pre-training for Goal-Directed Dialog](https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/)
+Baolin Peng, Michel Galley, Pengcheng He, Chris Brockett, Lars Liden, Elnaz Nouri, Zhou Yu, Bill Dolan, Jianfeng Gao
 
 ![image](doc/GODEL.png)
 
@@ -107,13 +107,13 @@ Open localhost:8080 in your web browser, you will see the following page. Note t
 
 ## Models
 
-We have released 2 fine-tuned models which can be further fine-tuned on low-resource user-customized dataset. The total parameters in these models range from 117M to 770M. The XL version will be accessible through an API.
+We have released three fine-tuned models which can be further fine-tuned on low-resource user-customized dataset. The total parameters in these models range from 117M to 2.7B.
 
 | Model      | Link |
 | :---: | :---: |
 | GODEL 110M Model      |  TBA      |
 | GODEL 770M Model   |     TBA    |
-| GODEL 175B Model   | API        |
+| GODEL 2.7B Model    | TBA        |
 
 ## Retraining full models
 
