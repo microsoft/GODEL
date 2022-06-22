@@ -7,7 +7,7 @@ Project Webpage:
 Arxiv paper: [GODEL: Large-Scale Pre-training for Goal-Directed Dialog
 ]() Author List
 
-![image](doc/DialoGLM.png)
+![image](doc/GODEL.png)
 
 GODEL is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
 
