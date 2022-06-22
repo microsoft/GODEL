@@ -31,8 +31,8 @@ export PYTHONPATH="`pwd`"
 Fetch and unzip the pretrained model based on which to continue finetune your own data. (*will release more versions of pretrained models, stay tuned*) 
 
 ```zsh
-wget https://bapengstorage.blob.core.windows.net/dialoglm_pretrained_models.tar.gz (TBA)
-tar -xvf dialoglm_pretrained_models.tar.gz
+wget https://bapengstorage.blob.core.windows.net/godel_base.tar.gz
+tar -xvf godel_base.tar.gz
 ```
 ## Pipeline
 **Data format**
@@ -256,11 +256,13 @@ Should you have any questions/suggestions, feel free to contact bapeng@microsoft
 ## Citation
 if you use this code and data in your research, please cite our arxiv paper:
 ```
-@techreport{GODEL,
-  title={Large-Scale Pre-training for Goal-Directed Dialogue},
-  author={Peng, Baolin and Galley, Michel and He, Pengcheng and Brockett, Chris and Liden, Lars and Nouri, Elnaz and Yu, Zhou and Dolan, Bill and Gao, Jianfeng},
-  year={2022},
-  institution={Microsoft Technical Report}
+@misc{peng2022godel,
+author = {Peng, Baolin and Galley, Michel and He, Pengcheng and Brockett, Chris and Liden, Lars and Nouri, Elnaz and Yu, Zhou and Dolan, Bill and Gao, Jianfeng},
+title = {GODEL: Large-Scale Pre-training for Goal-Directed Dialog},
+howpublished = {arXiv},
+year = {2022},
+month = {May},
+url = {https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/},
 }
 ```
 
