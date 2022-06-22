@@ -87,7 +87,7 @@ python generate.py --model_name_or_path ${MODEL_PATH}  \
 
 **Interaction**  
 
-We provide an demo interface to chat with finetuned models. The backend server is based on *flask* and the interface is based on *vue*, *bootstrap-vue*, and *BasicVueChat*.
+We provide a demo interface to chat with finetuned models. The backend server is based on *flask* and the interface is based on *vue*, *bootstrap-vue*, and *BasicVueChat*.
 
 Start the backend server:
 ```bash
@@ -261,7 +261,7 @@ author = {Peng, Baolin and Galley, Michel and He, Pengcheng and Brockett, Chris 
 title = {GODEL: Large-Scale Pre-training for Goal-Directed Dialog},
 howpublished = {arXiv},
 year = {2022},
-month = {May},
+month = {June},
 url = {https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/},
 }
 ```
