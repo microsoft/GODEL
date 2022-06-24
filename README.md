@@ -29,7 +29,7 @@ export PYTHONPATH="`pwd`"
 Fetch and unzip the pretrained model based on which to continue finetune your own data.  
 
 ```zsh
-wget https://bapengstorage.blob.core.windows.net/godel_base.tar.gz
+wget https://bapengstorage.blob.core.windows.net/fileshare/godel_base.tar.gz
 tar -zxvf godel_base.tar.gz
 ```
 ## Pipeline
