@@ -1,10 +1,10 @@
-# GODEL: Large-Scale Pre-training for Goal-Directed Dialog
+# GODEL: Large-Scale Pre-Training for Goal-Directed Dialog
 
 ## Introduction
 This repository showcases **building goal-directed dialog** using GODEL, and contains the dataset, source code and pre-trained model for the following paper:
 
 
-[GODEL: Large-Scale Pre-training for Goal-Directed Dialog](https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/)<br>Baolin Peng, Michel Galley, Pengcheng He, Chris Brockett, Lars Liden, Elnaz Nouri, Zhou Yu, Bill Dolan, Jianfeng Gao
+[GODEL: Large-Scale Pre-Training for Goal-Directed Dialog](https://www.microsoft.com/en-us/research/publication/godel-large-scale-pre-training-for-goal-directed-dialog/)<br>Baolin Peng, Michel Galley, Pengcheng He, Chris Brockett, Lars Liden, Elnaz Nouri, Zhou Yu, Bill Dolan, Jianfeng Gao
 ![image](doc/GODEL.png)
 
 GODEL is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
