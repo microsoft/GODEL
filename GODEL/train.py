@@ -76,6 +76,9 @@ def parse_args():
         "--validation_file", type=str, default=None, help="A csv or a json file containing the validation data."
     )
     parser.add_argument(
+        "--test_file", type=str, default=None, help="A csv or a json file containing the test data."
+    )
+    parser.add_argument(
         "--max_source_length",
         type=int,
         default=1024,
@@ -332,6 +335,8 @@ def main():
             data_files["train"] = args.train_file
         if args.validation_file is not None:
             data_files["validation"] = args.validation_file
+        if args.test_file is not None:
+            data_files["test"] = args.test_file
         extension = args.train_file.split(".")[-1]
         raw_datasets = load_dataset(extension, data_files=data_files)
     # See more about loading any type of standard or custom dataset (from files, python dict, pandas DataFrame, etc) at
