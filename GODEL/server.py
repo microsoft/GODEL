@@ -11,6 +11,7 @@ from transformers import (
     AutoConfig,
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
+    AutoModelForCausalLM
 )
 
 
@@ -47,7 +48,7 @@ def main():
     global model, tokenizer, args
 
     config = AutoConfig.from_pretrained(args.model_name_or_path)
-    model = AutoModelForSeq2SeqLM.from_pretrained(
+    model = AutoModelForCausalLM.from_pretrained(
         args.model_name_or_path,
         from_tf=bool(".ckpt" in args.model_name_or_path),
         config=config,

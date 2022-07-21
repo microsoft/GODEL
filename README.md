@@ -87,6 +87,10 @@ python generate.py --model_name_or_path ${MODEL_PATH}  \
 
 We provide a demo interface to chat with finetuned models. The backend server is based on *flask* and the interface is based on *vue*, *bootstrap-vue*, and *BasicVueChat*.
 
+Simple jupiter notebook:
+
+[Notebook](https://github.com/AlexWortega/GODEL/blob/main/jupiters/godel_faststart.ipynb)
+
 Start the backend server:
 ```bash
 # Please create the backend server refering to e.g., dstc9_server.py
