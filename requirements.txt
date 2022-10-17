@@ -15,4 +15,9 @@ wandb==0.12.11
 fire==0.4.0
 flask==2.0.2
 flask-Cors==3.0.10
+chardet==3.0.4
+nltk==3.4.1
+beautifulsoup4==4.6.0
+zstandard==0.18.0
+flashtext==2.7
 dotmap

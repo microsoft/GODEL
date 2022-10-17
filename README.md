@@ -9,7 +9,7 @@ This repository showcases **building goal-directed dialog** using GODEL, and con
 
 GODEL is a large-scale pre-trained model for goal-directed dialogs. It is parameterized with a Transformer-based encoder-decoder model and trained for response generation grounded in external text, which allows more effective fine-tuning on dialog tasks that require conditioning the response on information that is external to the current conversation (e.g., a retrieved document). The pre-trained model can be efficiently fine-tuned and adapted to accomplish a new dialog task with a handful of task-specific dialogs.
 
-This repository is based on Hugginface Transformers. Some evaluation scripts and dataset are adapted from [DSTC7-End-to-End-Conversation-Modeling](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling), [DialoGPT](https://github.com/microsoft/DialoGPT), [UnifiedQA](https://github.com/allenai/unifiedqa), [MS MARCO](https://microsoft.github.io/msmarco/), [MultiWOZ](https://github.com/budzianowski/multiwoz), [Schema-Guided Dataset](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), etc.
+This repository is based on Hugginface Transformers. Some evaluation scripts and dataset are adapted from [DSTC7-End-to-End-Conversation-Modeling](data/grounded), [DialoGPT](data/ungrounded), [UnifiedQA](https://github.com/allenai/unifiedqa), [MS MARCO](https://microsoft.github.io/msmarco/), [MultiWOZ](https://github.com/budzianowski/multiwoz), [Schema-Guided Dataset](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), etc.
 
 The included scripts can be used to reproduce the results reported in the paper. Project and demo webpage: [https://aka.ms/GODEL](https://aka.ms/GODEL)
 
