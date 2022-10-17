@@ -1,2 +1,2 @@
-nltk==3.4.1
+nltk==3.6.6
 beautifulsoup4==4.6.0
