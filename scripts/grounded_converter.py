@@ -15,7 +15,7 @@ import fire
 
 class Converter(ABC):
 
-    def __init__(self, filepath) - > None:
+    def __init__(self, filepath) -> None:
         super().__init__()
 
         self.filepath = filepath
