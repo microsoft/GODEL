@@ -7,6 +7,7 @@
 Please check out our model cards in the huggingface Transformers repository. With several lines of code, it should be pretty straightforward to chat with GODEL. A live demo is shown [here.](https://huggingface.co/spaces/microsoft/GODEL-Demo)
 
 Base model: https://huggingface.co/microsoft/GODEL-v1_1-base-seq2seq
+
 Large model: https://huggingface.co/microsoft/GODEL-v1_1-large-seq2seq
 
 ## Introduction
