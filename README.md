@@ -1,5 +1,14 @@
 # GODEL: Large-Scale Pre-Training for Goal-Directed Dialog
 
+## News
+
+(Update 10/23/2022) We have released GODEL V1.1, which is trained on 551M multi-turn dialogs from Reddit discussion thread, and 5M instruction and knowledge grounded dialogs. It has shown significantly better results on our benchmark, especially in the zero-shot setting.
+
+Please check out our model cards in the huggingface Transformers repository. With several lines of code, it should be pretty straightforward to chat with GODEL. A live demo is shown [here.](https://huggingface.co/spaces/microsoft/GODEL-Demo)
+
+Base model: https://huggingface.co/microsoft/GODEL-v1_1-base-seq2seq
+Large model: https://huggingface.co/microsoft/GODEL-v1_1-large-seq2seq
+
 ## Introduction
 This repository showcases **building goal-directed dialog** using GODEL, and contains the dataset, source code and pre-trained model for the following paper:
 
@@ -101,17 +110,18 @@ npm run serve
 ```
 Open localhost:8080 in your web browser, you will see the following page. Note that the backend port should be consistent with the port used in html/compoents/chat.vue.
 
-<img src="doc/interaction_interface_example.png" alt="drawing" width="600"/>
+A live demo is shown [here.](https://huggingface.co/spaces/microsoft/GODEL-Demo)
 
 ## Models
 
-We have released three fine-tuned models which can be further fine-tuned on low-resource user-customized dataset. The total parameters in these models range from 117M to 2.7B.
+We have released GODEL V1.1, which is trained on 551M multi-turn dialogs from Reddit discussion thread and 5M instruction and knowledge-grounded dialogs. More models will be released later.
 
-| Model      | Link |
+~~We have released three fine-tuned models which can be further fine-tuned on low-resource user-customized dataset. The total parameters in these models range from 117M to 2.7B.~~
+
+| Model      | Huggingface Model Cards |
 | :---: | :---: |
-| GODEL 220M Model      |  [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-Base.tar.gz)      |
-| GODEL 770M Model   |     [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-Large.tar.gz)    |
-| GODEL 2.7B Model    | [Link](https://bapengstorage.blob.core.windows.net/fileshare/GODEL-XLarge.tar.gz)        |
+| Base      |  [microsoft/GODEL-v1_1-base-seq2seq](https://huggingface.co/microsoft/GODEL-v1_1-base-seq2seq)      |
+| Large   |     [microsoft/GODEL-v1_1-large-seq2seq](https://huggingface.co/microsoft/GODEL-v1_1-large-seq2seq)    |
 
 
 ## Retraining full models
