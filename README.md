@@ -31,7 +31,7 @@ Please use the below commands to create the environment, clone the repo and inst
 conda create -n godel-env python=3.8
 conda activate godel-env
 conda install nodejs
-git clone https://github.com/microsoft/GODEL.git
+git clone https://github.com/leonl111/GODEL.git
 cd GODEL
 pip install -r requirements.txt
 export PYTHONPATH="`pwd`"
