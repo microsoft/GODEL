@@ -1,6 +1,6 @@
 ## Retraining full models
 
-*Important:* 5/22/2023: It is no longer possible to retrain GODEL models from scratch as the [dump files](https://files.pushshift.io/reddit) of the Pushshift Reddit Dataset have been recently deleted. If you would like to recreate Reddit data, please consider using the Pushshift [API](https://github.com/pushshift/api) instead, but please note that the API is not supported by the GODEL codebase. We left the instructions below for historical reasons (e.g., for users who still have the Reddit dump files), but these instructions no longer work.
+**Important:** 5/22/2023: It is no longer possible to retrain GODEL models from scratch as the [dump files](https://files.pushshift.io/reddit) of the Pushshift Reddit Dataset have been recently deleted. If you would like to recreate Reddit data, please consider using the Pushshift [API](https://github.com/pushshift/api) instead, but please note that the API is not supported by the GODEL codebase. We left the instructions below for historical reasons (e.g., for users who still have the Reddit dump files), but these instructions no longer work without the dump files.
 
 ### Data preparation
 GODEL is pre-trained with three phases 1) Linguistic pre-training on public web documents to gain the capability of text generation. 2) Dialog pre-training on public dialog data to learn to chat like a human. 3) Grounded dialog pre-training to enable a dialog model to generate responses grounding on specific goals.
