@@ -127,7 +127,7 @@ We have released GODEL V1.1, which is trained on 551M multi-turn dialogs from Re
 
 ## Training
 
-*Important:* 5/22/2023: Pretraining GODEL models with our codebase is no longer supported, but GODEL models remain available. See [here](TRAIN.md) for details.
+5/22/2023: Pretraining GODEL models with our codebase is no longer supported, but GODEL models remain available. See [here](TRAIN.md) for details.
 
 ### Fine-tuning and Evaluation
 
