@@ -51,7 +51,7 @@ def generate_for_queue(in_queue, out_queue):
 
 if __name__ == "__main__":
 
-    from DialoGLM.server import *
+    from GODEL.server import *
     # replace the path with your trained checkpoint
     args.model_name_or_path = 't5-base'
     main()
