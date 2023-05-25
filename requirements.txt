@@ -13,7 +13,7 @@ tqdm==4.64.0
 transformers==4.17.0
 wandb==0.12.11
 fire==0.4.0
-flask==2.0.2
+flask==2.3.2
 flask-Cors==3.0.10
 chardet==3.0.4
 nltk==3.4.1
