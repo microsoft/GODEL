@@ -8,7 +8,7 @@ numpy==1.22.3
 python-dotenv==0.20.0
 rouge_score==0.0.4
 six==1.16.0
-torch==1.11.0
+torch==1.13.1
 tqdm==4.64.0
 transformers==4.17.0
 wandb==0.12.11
